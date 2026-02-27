@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>SND TAG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="centerBox">
+    <div class="circle"></div>
+    <h1>IMBA MODE</h1>
+
+    <!-- Telegram карточка -->
+    <a href="https://t.me/sndtag_ua" target="_blank" class="tgCard">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+        <div class="tgInfo">
+            <span>JOIN TELEGRAM</span>
+            <small>@sndtag_ua</small>
+        </div>
+    </a>
+
+    <!-- Creator блок -->
+    <div class="creatorBox" id="creatorBox">
+        <div class="creatorText">Creator 6-A Kiril</div>
+    </div>
+
+</div>
+
+<div class="startScreen">
+    CLICK TO ENTER
+</div>
+
+<audio id="bgSound" loop>
+    <source src="Sigma Ahh.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const sound = document.getElementById("bgSound");
+    const startScreen = document.querySelector(".startScreen");
+    const creator = document.getElementById("creatorBox");
+
+    sound.volume = 1.0;
+
+    function startAudio() {
+        sound.play().catch(() => {});
+        startScreen.style.opacity = "0";
+        setTimeout(() => startScreen.remove(), 500);
+
+        document.removeEventListener("click", startAudio);
+
+        setTimeout(() => {
+            creator.classList.add("active");
+        }, 600);
+    }
+
+    document.addEventListener("click", startAudio);
+
+    document.addEventListener("mousemove", (e) => {
+        createTrail(e.clientX, e.clientY);
+    });
+
+    function createTrail(x, y) {
+        const trail = document.createElement("div");
+        trail.className = "trail";
+        trail.style.left = x + "px";
+        trail.style.top = y + "px";
+        document.body.appendChild(trail);
+
+        setTimeout(() => {
+            trail.remove();
+        }, 600);
+    }
+
+});
+</script>
+
+</body>
+</html>
